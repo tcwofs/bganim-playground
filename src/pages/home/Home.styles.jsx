@@ -2,8 +2,8 @@ import { makeStyles } from '@material-ui/core/styles';
 
 export const useStyles = makeStyles((theme) => ({
   homeArea: {
-    width: '20vw',
-    height: '20vh',
+    width: '25rem',
+    height: '15rem',
     borderRadius: '7px',
     backgroundColor: theme.palette.background.fiveperc,
     position: 'absolute',
@@ -20,5 +20,7 @@ export const useStyles = makeStyles((theme) => ({
   },
   mainText: {
     paddingTop: '2rem',
+    paddingLeft: '1rem',
+    paddingRight: '1rem',
   },
 }));

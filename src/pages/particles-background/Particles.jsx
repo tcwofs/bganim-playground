@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { isMobile } from 'react-device-detect';
 import Canvas from 'react-responsive-canvas';
 
 const Particles = () => {
@@ -10,35 +11,22 @@ const Particles = () => {
 
   useEffect(() => {
     ref.current = canref;
-
     let canvas = ref.current;
-
     if (!canvas) {
       return;
     }
-
     let context = canvas.getContext('2d');
-
-    if (!context) {
-      return;
-    }
-
-    let numberOfStars = canvas.width * 0.06; // Number of stars
-
-    pushStars(canvas.width, canvas.height, numberOfStars);
-
+    let numberOfStars = isMobile ? 60 : 100; // Number of stars
     let requestID;
-    const render = () => {
-      if (context) {
-        draw(context, canvas);
-        if (canvas) {
-          update(canvas.width, canvas.height);
-        }
 
-        requestID = requestAnimationFrame(render);
-      }
+    const render = () => {
+      draw(context, canvas);
+      update(canvas.width, canvas.height);
+
+      requestID = requestAnimationFrame(render);
     };
 
+    pushStars(canvas.width, canvas.height, numberOfStars);
     render();
 
     return () => {
@@ -51,7 +39,7 @@ const Particles = () => {
       stars.push({
         x: Math.random() * width,
         y: Math.random() * height,
-        radius: Math.random() * 1 + 1,
+        radius: isMobile ? 5 : 2,
         vx: Math.floor(Math.random() * 50) - 25,
         vy: Math.floor(Math.random() * 50) - 25,
       });
@@ -73,7 +61,7 @@ const Particles = () => {
       context.beginPath();
       context.arc(s.x, s.y, s.radius, 0, 2 * Math.PI);
       context.fill();
-      context.fillStyle = '#121212';
+      context.fillStyle = 'black';
       context.stroke();
     }
 
@@ -88,7 +76,7 @@ const Particles = () => {
         }
       }
     }
-    context.lineWidth = 0.05;
+    context.lineWidth = isMobile ? 0.5 : 0.1;
     context.strokeStyle = 'white';
     context.stroke();
   };
