@@ -1,19 +1,25 @@
 import React, { useCallback, useEffect, useRef } from 'react';
-import * as THREE from 'three';
+import { AmbientLight, BoxGeometry, Color, DirectionalLight, Mesh, MeshPhongMaterial, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 
 const Cube = () => {
   const mount = useRef(null);
-  const scene = new THREE.Scene();
-  const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-  const renderer = new THREE.WebGLRenderer({ antialias: true });
-  const geometry = new THREE.BoxGeometry(1, 1, 1);
-  const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 });
-  const cube = new THREE.Mesh(geometry, material);
+  const scene = new Scene();
+  const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const renderer = new WebGLRenderer({ antialias: true });
+  const geometry = new BoxGeometry(1, 1, 1);
+  const material = new MeshPhongMaterial({ color: 0x00ff00 });
+  const cube = new Mesh(geometry, material);
+  const directionalLight = new DirectionalLight(0xffffff);
+  const ambient = new AmbientLight(0x555555);
 
-  scene.background = new THREE.Color(0x121212);
-  renderer.setSize(window.innerWidth, window.innerHeight);
-  scene.add(cube);
   camera.position.z = 5;
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  directionalLight.position.set(0, 5, 5);
+  directionalLight.target = cube;
+  scene.background = new Color(0x121212);
+  scene.add(directionalLight);
+  scene.add(cube);
+  scene.add(ambient);
 
   const handleResize = useCallback(() => {
     camera.aspect = window.innerWidth / window.innerHeight;

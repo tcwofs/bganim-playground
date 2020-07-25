@@ -24,19 +24,25 @@ const DrawerComponent = () => {
       className={clsx(classes.list, {
         [classes.fullList]: false,
       })}
-      role="presentation"
+      role='presentation'
       onClick={toggleDrawer(false)}
       onKeyDown={toggleDrawer(false)}
     >
       <List>
-        <ListItem button component={Link} to="/">
-          <ListItemText primary="/home/" />
+        <ListItem button component={Link} to='/'>
+          <ListItemText primary='/home/' />
         </ListItem>
-        <ListItem button component={Link} to="/particles">
-          <ListItemText primary="/particles/" />
+        <ListItem button component={Link} to='/particles'>
+          <ListItemText primary='/particles/' />
         </ListItem>
-        <ListItem button component={Link} to="/simple-cube">
-          <ListItemText primary="/simplecube/" />
+        <ListItem button component={Link} to='/simple-cube'>
+          <ListItemText primary='/simplecube/' />
+        </ListItem>
+        <ListItem button component={Link} to='/nebula'>
+          <ListItemText primary='/nebula/' />
+        </ListItem>
+        <ListItem button component={Link} to='/rain'>
+          <ListItemText primary='/rain/' />
         </ListItem>
       </List>
     </div>

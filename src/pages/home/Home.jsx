@@ -17,11 +17,15 @@ const Home = () => {
           <br />
           <br />
           <Link href='https://codepen.io/LeonGr/pen/yginI' target='_blank' color='secondary'>
-            /particles animation/
+            /particles/
           </Link>
           <br />
-          <Link href='https://codepen.io/LeonGr/pen/yginI' target='_blank' color='secondary'>
-            /particles animation/
+          <Link href='https://redstapler.co/cool-nebula-background-effect-three-js/' target='_blank' color='secondary'>
+            /nebula/
+          </Link>
+          <br />
+          <Link href='https://redstapler.co/three-js-realistic-rain-tutorial/' target='_blank' color='secondary'>
+            /rain/
           </Link>
         </Typography>
       </div>

@@ -3,7 +3,7 @@ import { makeStyles } from '@material-ui/core/styles';
 export const useStyles = makeStyles((theme) => ({
   homeArea: {
     width: '25rem',
-    height: '15rem',
+    height: '16rem',
     borderRadius: '7px',
     backgroundColor: theme.palette.background.fiveperc,
     position: 'absolute',
