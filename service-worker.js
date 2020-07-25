@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/bganim-playground/precache-manifest.226a7679e293d5d5c966e2577970a3a7.js"
+  "/bganim-playground/precache-manifest.f243a7ec2d865dbc30842cb112626b14.js"
 );
 
 self.addEventListener('message', (event) => {
