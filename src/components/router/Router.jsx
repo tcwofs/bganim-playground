@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 import { Cube, Home, Nebula, Particles, Rain } from '../../pages';
 import Drawer from '../drawer/Drawer';
 import { useStyles } from './Router.styles';
