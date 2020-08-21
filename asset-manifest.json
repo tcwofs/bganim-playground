@@ -1,22 +1,22 @@
 {
   "files": {
     "main.css": "/bganim-playground/static/css/main.e8f757dc.chunk.css",
-    "main.js": "/bganim-playground/static/js/main.8b31172d.chunk.js",
-    "main.js.map": "/bganim-playground/static/js/main.8b31172d.chunk.js.map",
+    "main.js": "/bganim-playground/static/js/main.e53e8e16.chunk.js",
+    "main.js.map": "/bganim-playground/static/js/main.e53e8e16.chunk.js.map",
     "runtime-main.js": "/bganim-playground/static/js/runtime-main.55fb8e8d.js",
     "runtime-main.js.map": "/bganim-playground/static/js/runtime-main.55fb8e8d.js.map",
-    "static/js/2.15674f6a.chunk.js": "/bganim-playground/static/js/2.15674f6a.chunk.js",
-    "static/js/2.15674f6a.chunk.js.map": "/bganim-playground/static/js/2.15674f6a.chunk.js.map",
+    "static/js/2.a4dd4190.chunk.js": "/bganim-playground/static/js/2.a4dd4190.chunk.js",
+    "static/js/2.a4dd4190.chunk.js.map": "/bganim-playground/static/js/2.a4dd4190.chunk.js.map",
     "index.html": "/bganim-playground/index.html",
-    "precache-manifest.f243a7ec2d865dbc30842cb112626b14.js": "/bganim-playground/precache-manifest.f243a7ec2d865dbc30842cb112626b14.js",
+    "precache-manifest.b0e48b64f4106b6b8247bdb83578ebe0.js": "/bganim-playground/precache-manifest.b0e48b64f4106b6b8247bdb83578ebe0.js",
     "service-worker.js": "/bganim-playground/service-worker.js",
     "static/css/main.e8f757dc.chunk.css.map": "/bganim-playground/static/css/main.e8f757dc.chunk.css.map",
-    "static/js/2.15674f6a.chunk.js.LICENSE.txt": "/bganim-playground/static/js/2.15674f6a.chunk.js.LICENSE.txt"
+    "static/js/2.a4dd4190.chunk.js.LICENSE.txt": "/bganim-playground/static/js/2.a4dd4190.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.55fb8e8d.js",
-    "static/js/2.15674f6a.chunk.js",
+    "static/js/2.a4dd4190.chunk.js",
     "static/css/main.e8f757dc.chunk.css",
-    "static/js/main.8b31172d.chunk.js"
+    "static/js/main.e53e8e16.chunk.js"
   ]
 }
