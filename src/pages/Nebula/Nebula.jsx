@@ -1,11 +1,11 @@
 import { BlendFunction, BloomEffect, EffectComposer, EffectPass, KernelSize, RenderPass } from 'postprocessing';
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useMemo } from 'react';
 import {
   AmbientLight,
   Color,
   DirectionalLight,
   FogExp2,
-  Geometry,
+  BufferGeometry,
   Mesh,
   MeshLambertMaterial,
   PerspectiveCamera,
@@ -15,17 +15,17 @@ import {
   PointsMaterial,
   Scene,
   TextureLoader,
-  Vector3,
   WebGLRenderer,
+  Float32BufferAttribute,
 } from 'three';
 
 const Nebula = () => {
   const mount = useRef(null);
-  const scene = new Scene();
-  const camera = new PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
-  const renderer = new WebGLRenderer({ antialias: true });
-  const ambient = new AmbientLight(0x261b2e);
-  const loader = new TextureLoader();
+  const scene = useMemo(() => new Scene(), []);
+  const camera = useMemo(() => new PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000), []);
+  const renderer = useMemo(() => new WebGLRenderer({ antialias: true }), []);
+  const ambient = useMemo(() => new AmbientLight(0x261b2e), []);
+  const loader = useMemo(() => new TextureLoader(), []);
   const directionalLight = new DirectionalLight(0x382d43);
   const orangeLight = new PointLight(0xfd724e, 50, 450, 1.7);
   const redLight = new PointLight(0xa02f40, 50, 450, 1.7);
@@ -37,18 +37,19 @@ const Nebula = () => {
     luminanceThreshold: 0.3,
     luminanceSmoothing: 0.75,
   });
-  const rainGeo = new Geometry();
+  const rainGeo = new BufferGeometry();
+  const rainVertices = [];
   const rainCount = 15000;
   const rainMaterial = new PointsMaterial({ color: 0xaaaaaa, size: 0.1, transparent: true });
   const effectPass = new EffectPass(camera, bloomEffect);
-  const composer = new EffectComposer(renderer);
-  let cloudParticles = [];
+  const composer = useMemo(() => new EffectComposer(renderer), [renderer]);
+  let cloudParticles = useMemo(() => [], []);
   let rain;
 
   for (let i = 0; i < rainCount; i++) {
-    let rainDrop = new Vector3(Math.random() * 400 - 200, Math.random() * 500 - 250, Math.random() * 400 - 200);
-    rainGeo.vertices.push(rainDrop);
+    rainVertices.push(Math.random() * 400 - 200, Math.random() * 500 - 250, Math.random() * 400 - 200);
   }
+  rainGeo.setAttribute('position', new Float32BufferAttribute(rainVertices, 3));
 
   camera.position.z = 1;
   camera.rotation.x = 1.16;

@@ -1,11 +1,12 @@
 import { BlendFunction, BloomEffect, EffectComposer, EffectPass, KernelSize, RenderPass } from 'postprocessing';
-import React, { useCallback, useEffect, useRef } from 'react';
+import React, { useCallback, useEffect, useRef, useMemo } from 'react';
 import {
   AmbientLight,
+  BufferGeometry,
   Color,
   DirectionalLight,
+  Float32BufferAttribute,
   FogExp2,
-  Geometry,
   Mesh,
   MeshLambertMaterial,
   PerspectiveCamera,
@@ -15,19 +16,19 @@ import {
   PointsMaterial,
   Scene,
   TextureLoader,
-  Vector3,
+  Vector4,
   WebGLRenderer,
 } from 'three';
 
 const Rain = () => {
   const mount = useRef(null);
-  const scene = new Scene();
-  const camera = new PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
-  const renderer = new WebGLRenderer({ antialias: true });
+  const scene = useMemo(() => new Scene(), []);
+  const camera = useMemo(() => new PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000), []);
+  const renderer = useMemo(() => new WebGLRenderer({ antialias: true }), []);
   const ambient = new AmbientLight(0x0b0630);
   const loader = new TextureLoader();
   const directionalLight = new DirectionalLight(0xf8e3c4);
-  const flash = new PointLight(0x6b1fb1, 30, 500, 1.7);
+  const flash = useMemo(() => new PointLight(0x6b1fb1, 30, 500, 1.7), []);
   const bloomEffect = new BloomEffect({
     blendFunction: BlendFunction.COLOR_DODGE,
     kernelSize: KernelSize.SMALL,
@@ -35,20 +36,19 @@ const Rain = () => {
     luminanceThreshold: 0.3,
     luminanceSmoothing: 0.75,
   });
-  const rainGeo = new Geometry();
+  const rainGeo = useMemo(() => new BufferGeometry(), []);
   const rainCount = 15000;
+  const rainVertices = [];
   const rainMaterial = new PointsMaterial({ color: 0xaaaaaa, size: 0.1, transparent: true });
   const effectPass = new EffectPass(camera, bloomEffect);
-  const composer = new EffectComposer(renderer);
-  let cloudParticles = [];
+  const composer = useMemo(() => new EffectComposer(renderer), [renderer]);
+  let cloudParticles = useMemo(() => [], []);
   let rain;
 
   for (let i = 0; i < rainCount; i++) {
-    let rainDrop = new Vector3(Math.random() * 400 - 200, Math.random() * 500 - 250, Math.random() * 400 - 200);
-    rainDrop.velocity = {};
-    rainDrop.velocity = 0;
-    rainGeo.vertices.push(rainDrop);
+    rainVertices.push(Math.random() * 400 - 200, Math.random() * 500 - 250, Math.random() * 400 - 200, 0);
   }
+  rainGeo.setAttribute('position', new Float32BufferAttribute(rainVertices, 4));
 
   camera.position.z = 1;
   camera.rotation.x = 1.16;
@@ -95,15 +95,23 @@ const Rain = () => {
   }, [camera, renderer]);
 
   const animate = useCallback(() => {
-    rainGeo.vertices.forEach((p) => {
-      p.velocity -= 0.1 + Math.random() * 0.1;
-      p.y += p.velocity;
-      if (p.y < -200) {
-        p.y = 200;
-        p.velocity = 0;
+    const vertex = new Vector4();
+    let positionAttribute = rainGeo.getAttribute('position');
+
+    for (let i = 0; i < positionAttribute.count; i++) {
+      vertex.fromBufferAttribute(positionAttribute, i);
+      vertex.w -= 0.1 + Math.random() * 0.1;
+      vertex.y += vertex.w;
+
+      if (vertex.y < -200) {
+        vertex.y = 200;
+        vertex.w = 0;
       }
-    });
-    rainGeo.verticesNeedUpdate = true;
+
+      positionAttribute.setXYZW(i, vertex.x, vertex.y, vertex.z, vertex.w);
+    }
+    positionAttribute.needsUpdate = true;
+
     rain.rotation.y += 0.002;
     if (Math.random() > 0.99 || flash.power > 100) {
       if (flash.power < 100) flash.position.set(Math.random() * 400, 300 + Math.random() * 200, 100);
@@ -114,7 +122,7 @@ const Rain = () => {
     });
     requestAnimationFrame(animate);
     composer.render(0.1);
-  }, [cloudParticles, composer, flash.position, flash.power, rain.rotation.y, rainGeo.vertices, rainGeo.verticesNeedUpdate]);
+  }, [cloudParticles, composer, flash, rain.rotation, rainGeo]);
 
   useEffect(() => {
     window.addEventListener('resize', handleResize);
