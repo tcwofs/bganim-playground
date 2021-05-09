@@ -1,7 +1,7 @@
-import Cube from './cube-simple-animation/Cube';
-import Home from './home/Home';
-import Nebula from './nebula/Nebula';
-import Particles from './particles-background/Particles';
-import Rain from './rain/Rain';
+import Cube from './CubeSimpleAnimation/Cube';
+import Home from './Home/Home';
+import Nebula from './Nebula/Nebula';
+import Particles from './ParticlesBackground/Particles';
+import Rain from './Rain/Rain';
 
 export { Cube, Home, Particles, Nebula, Rain };
