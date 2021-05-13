@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { BlendFunction, BloomEffect, EffectComposer, EffectPass, KernelSize, RenderPass } from 'postprocessing';
-import React, { useCallback, useEffect, useRef, useMemo } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import {
   AmbientLight,
   Color,
@@ -21,11 +22,11 @@ import {
 
 const Nebula = () => {
   const mount = useRef(null);
-  const scene = useMemo(() => new Scene(), []);
-  const camera = useMemo(() => new PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000), []);
-  const renderer = useMemo(() => new WebGLRenderer({ antialias: true }), []);
-  const ambient = useMemo(() => new AmbientLight(0x261b2e), []);
-  const loader = useMemo(() => new TextureLoader(), []);
+  const scene = new Scene();
+  const camera = new PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+  const renderer = new WebGLRenderer({ antialias: true });
+  const ambient = new AmbientLight(0x261b2e);
+  const loader = new TextureLoader();
   const directionalLight = new DirectionalLight(0x382d43);
   const orangeLight = new PointLight(0xfd724e, 50, 450, 1.7);
   const redLight = new PointLight(0xa02f40, 50, 450, 1.7);
@@ -42,8 +43,8 @@ const Nebula = () => {
   const rainCount = 15000;
   const rainMaterial = new PointsMaterial({ color: 0xaaaaaa, size: 0.1, transparent: true });
   const effectPass = new EffectPass(camera, bloomEffect);
-  const composer = useMemo(() => new EffectComposer(renderer), [renderer]);
-  let cloudParticles = useMemo(() => [], []);
+  const composer = new EffectComposer(renderer);
+  let cloudParticles = [];
   let rain;
 
   for (let i = 0; i < rainCount; i++) {
@@ -117,11 +118,7 @@ const Nebula = () => {
     animate();
   }, [animate, camera, mount, renderer, scene]);
 
-  return (
-    <div>
-      <div ref={(ref) => (mount.current = ref)} />
-    </div>
-  );
+  return <div ref={(ref) => (mount.current = ref)} />;
 };
 
 export default Nebula;

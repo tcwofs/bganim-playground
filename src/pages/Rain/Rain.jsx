@@ -1,5 +1,6 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { BlendFunction, BloomEffect, EffectComposer, EffectPass, KernelSize, RenderPass } from 'postprocessing';
-import React, { useCallback, useEffect, useRef, useMemo } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import {
   AmbientLight,
   BufferGeometry,
@@ -22,13 +23,13 @@ import {
 
 const Rain = () => {
   const mount = useRef(null);
-  const scene = useMemo(() => new Scene(), []);
-  const camera = useMemo(() => new PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000), []);
-  const renderer = useMemo(() => new WebGLRenderer({ antialias: true }), []);
+  const scene = new Scene();
+  const camera = new PerspectiveCamera(60, window.innerWidth / window.innerHeight, 1, 1000);
+  const renderer = new WebGLRenderer({ antialias: true });
   const ambient = new AmbientLight(0x0b0630);
   const loader = new TextureLoader();
   const directionalLight = new DirectionalLight(0xf8e3c4);
-  const flash = useMemo(() => new PointLight(0x6b1fb1, 30, 500, 1.7), []);
+  const flash = new PointLight(0x6b1fb1, 30, 500, 1.7);
   const bloomEffect = new BloomEffect({
     blendFunction: BlendFunction.COLOR_DODGE,
     kernelSize: KernelSize.SMALL,
@@ -36,13 +37,13 @@ const Rain = () => {
     luminanceThreshold: 0.3,
     luminanceSmoothing: 0.75,
   });
-  const rainGeo = useMemo(() => new BufferGeometry(), []);
+  const rainGeo = new BufferGeometry();
   const rainCount = 15000;
   const rainVertices = [];
   const rainMaterial = new PointsMaterial({ color: 0xaaaaaa, size: 0.1, transparent: true });
   const effectPass = new EffectPass(camera, bloomEffect);
-  const composer = useMemo(() => new EffectComposer(renderer), [renderer]);
-  let cloudParticles = useMemo(() => [], []);
+  const composer = new EffectComposer(renderer);
+  let cloudParticles = [];
   let rain;
 
   for (let i = 0; i < rainCount; i++) {
@@ -134,11 +135,7 @@ const Rain = () => {
     animate();
   }, [animate, camera, mount, renderer, scene]);
 
-  return (
-    <div>
-      <div ref={(ref) => (mount.current = ref)} />
-    </div>
-  );
+  return <div ref={(ref) => (mount.current = ref)} />;
 };
 
 export default Rain;

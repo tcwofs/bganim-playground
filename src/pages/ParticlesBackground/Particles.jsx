@@ -71,12 +71,13 @@ const Particles = () => {
       context.moveTo(starI.x, starI.y);
       for (let j = 0, x = stars.length; j < x; j++) {
         let starII = stars[j];
-        if (distance(starI, starII) < 150) {
+        const lineLength = canvas.height / 10;
+        if (distance(starI, starII) < lineLength) {
           context.lineTo(starII.x, starII.y);
         }
       }
     }
-    context.lineWidth = isMobile ? 0.5 : 0.1;
+    context.lineWidth = isMobile ? 2 : 0.5;
     context.strokeStyle = 'white';
     context.stroke();
   };
