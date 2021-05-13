@@ -5,15 +5,15 @@
     "main.js.map": "/bganim-playground/static/js/main.3f7288eb.chunk.js.map",
     "runtime-main.js": "/bganim-playground/static/js/runtime-main.96594588.js",
     "runtime-main.js.map": "/bganim-playground/static/js/runtime-main.96594588.js.map",
-    "static/js/2.913b55dd.chunk.js": "/bganim-playground/static/js/2.913b55dd.chunk.js",
-    "static/js/2.913b55dd.chunk.js.map": "/bganim-playground/static/js/2.913b55dd.chunk.js.map",
+    "static/js/2.f074301f.chunk.js": "/bganim-playground/static/js/2.f074301f.chunk.js",
+    "static/js/2.f074301f.chunk.js.map": "/bganim-playground/static/js/2.f074301f.chunk.js.map",
     "index.html": "/bganim-playground/index.html",
     "static/css/main.bed4a6c1.chunk.css.map": "/bganim-playground/static/css/main.bed4a6c1.chunk.css.map",
-    "static/js/2.913b55dd.chunk.js.LICENSE.txt": "/bganim-playground/static/js/2.913b55dd.chunk.js.LICENSE.txt"
+    "static/js/2.f074301f.chunk.js.LICENSE.txt": "/bganim-playground/static/js/2.f074301f.chunk.js.LICENSE.txt"
   },
   "entrypoints": [
     "static/js/runtime-main.96594588.js",
-    "static/js/2.913b55dd.chunk.js",
+    "static/js/2.f074301f.chunk.js",
     "static/css/main.bed4a6c1.chunk.css",
     "static/js/main.3f7288eb.chunk.js"
   ]
