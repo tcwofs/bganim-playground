@@ -1,11 +1,12 @@
-import React, { useCallback, useEffect, useRef, useMemo } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import React, { useCallback, useEffect, useRef } from 'react';
 import { AmbientLight, BoxGeometry, Color, DirectionalLight, Mesh, MeshPhongMaterial, PerspectiveCamera, Scene, WebGLRenderer } from 'three';
 
 const Cube = () => {
   const mount = useRef(null);
-  const scene = useMemo(() => new Scene(), []);
-  const camera = useMemo(() => new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000), []);
-  const renderer = useMemo(() => new WebGLRenderer({ antialias: true }), []);
+  const scene = new Scene();
+  const camera = new PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+  const renderer = new WebGLRenderer({ antialias: true });
   const geometry = new BoxGeometry(1, 1, 1);
   const material = new MeshPhongMaterial({ color: 0x00ff00 });
   const cube = new Mesh(geometry, material);

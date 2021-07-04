@@ -9,5 +9,6 @@ export const useStyles = makeStyles({
   },
   menu: {
     position: 'absolute',
+    zIndex: 99999,
   },
 });

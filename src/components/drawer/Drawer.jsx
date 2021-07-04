@@ -6,6 +6,7 @@ import clsx from 'clsx';
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useStyles } from './Drawer.style';
+import Routes from '../../pages';
 
 const DrawerComponent = () => {
   const classes = useStyles();
@@ -38,18 +39,11 @@ const DrawerComponent = () => {
         <ListItem button component={Link} to='/'>
           <ListItemText primary='/home/' />
         </ListItem>
-        <ListItem button component={Link} to='/particles'>
-          <ListItemText primary='/particles/' />
-        </ListItem>
-        <ListItem button component={Link} to='/simple-cube'>
-          <ListItemText primary='/simplecube/' />
-        </ListItem>
-        <ListItem button component={Link} to='/nebula'>
-          <ListItemText primary='/nebula/' />
-        </ListItem>
-        <ListItem button component={Link} to='/rain'>
-          <ListItemText primary='/rain/' />
-        </ListItem>
+        {Object.keys(Routes).map((key) => (
+          <ListItem button component={Link} to={`/${key.toLowerCase()}`} key={key}>
+            <ListItemText primary={`/${key.toLowerCase()}/`} />
+          </ListItem>
+        ))}
       </List>
     </div>
   );
